@@ -3,6 +3,7 @@ from engine import core
 
 class GameObject:
     def __init__(self, x, y, width, height, color , scripts,logger):
+        self.name = "GameObject"
         self.x = x
         self.y = y
         self.width = width
@@ -14,8 +15,13 @@ class GameObject:
         self.logger = logger
 
     def start(self):
-        for i in self.scripts:
-            i.start()
+        if self.scripts == None:
+            for i in self.scripts:
+                if i == None:
+                    continue
+                else:
+                    i.start()
+
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
         try:
@@ -27,5 +33,9 @@ class GameObject:
 
 
     def update(self):
-        for i in self.scripts:
-            i.update()
+        if self.scripts == None:
+            for i in self.scripts:
+                if i == None:
+                    continue
+                else:
+                    i.update()

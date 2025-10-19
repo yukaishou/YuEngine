@@ -35,26 +35,25 @@ class engine:
         self.sdk = sdk.SDK(self,self.scene,self.key,None,self.core,self.application)
         self.log.add_log("Setting up SDK...","INFO")
         self.clock.tick(fps)
-        self.test_prefab()
+        #self.test_prefab()
         while self.running:
             try:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.quit()
-                    self.bt.handle_event(event)
-                    self.bt1.handle_event(event)
+                    #self.bt.handle_event(event)
+                    #self.bt1.handle_event(event)
             except Exception as e:
                 self.log.add_log(f"Error: {e}","ERROR")
             self.application.updeta()
-            self.scene.update()
-            self.scene.draw(self.screen)
-            self.img_cls.draw(self.screen,0,0, )
+            #self.img_cls.draw(self.screen,0,0, )
             #self.img_cls1.draw(self.screen,size[0]//2,size[1]//2 - 150)
+            self.scene.draw(self.screen)
             for i in self.scene.game_objects:
                 i.update()
             #self.txt.draw(self.screen)
-            self.bt.draw(self.screen)
-            self.bt1.draw(self.screen)
+            #self.bt.draw(self.screen)
+            #self.bt1.draw(self.screen)
             pygame.display.update()
 
 

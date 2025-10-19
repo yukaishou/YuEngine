@@ -9,7 +9,7 @@ class Scene:
         self.game_objects = []
         self.camera = None
         self.background_color = (0, 0, 0)
-        self.load(path,dirpath)
+        self.load_(path,dirpath)
 
     def add_game_object(self, game_object):
         self.game_objects.append(game_object)
@@ -69,7 +69,7 @@ class SceneInfo:
         self.game_objects = game_objects
         self.game_objects_name = []
         for i in game_objects:
-            self.game_objects_name.append(i['name'])
+            self.game_objects_name.append(i)
         print(self.game_objects_name)
 
 class GameObjectInfo:

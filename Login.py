@@ -83,6 +83,9 @@ class LoginWindow(QWidget):
     def handle_response(self, response):
         if response['success']:
             QMessageBox.information(self, '成功', response['message'])
+            save_acc(self.username.text(), self.password.text())
+            # 关闭应用
+            QApplication.quit()
         else:
             QMessageBox.warning(self, '错误', response['message'])
 
@@ -134,11 +137,17 @@ class RegisterWindow(QWidget):
     def handle_response(self, response):
         if response['success']:
             QMessageBox.information(self, '成功', response['message'])
+            # 注册成功后保存账号密码
+            save_acc(self.username.text(), self.password.text())
             self.close()
+
         else:
             QMessageBox.warning(self, '错误', response['message'])
 
-
+def save_acc (username, password):
+    with open('save/acc/acc.txt', 'w') as f:
+        f.write(username + '\n')
+        f.write(password + '\n')
 # 类似登录窗口的网络请求处理
 # 可以复用APIWorker类
 

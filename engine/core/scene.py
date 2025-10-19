@@ -17,7 +17,7 @@ class Scene:
         self.path = path
         self.game_objects: List[GameObject] = []
         self.camera = None
-        self.background_color = (0, 0, 0)
+        self.background_color = (255,255,255)
         self.dirpath = ""
         self._load_scene(path, dirpath)
 

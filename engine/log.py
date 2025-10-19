@@ -1,3 +1,4 @@
+from datetime import datetime
 class Log:
     def __init__(self):
         self.logs = []
@@ -8,10 +9,10 @@ class Log:
         print(log)
 
     def get_logs(self):
-        return self.logs
+        return self.logs.copy()
 
-    def save_log(self,time):
-        self.log = self.logs
-        with open("../Yuengine/Log/" + time.strftime("%Y-%m-%d_%H-%M-%S") + ".txt", "w") as f:
-            for line in self.log:
+    def save_log(self):
+        time = datetime.now()
+        with open("../YuEngine/Log/" + time.strftime("%Y-%m-%d_%H-%M-%S") + ".txt", "w") as f:
+            for line in self.logs:
                 f.write(line + "\n")

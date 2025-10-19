@@ -61,6 +61,7 @@ class engine:
     def quit(self):
         self.running = False
         self.log.add_log("Exiting...","INFO")
+        self.log.save_log()
         sys.exit()
 
     def full_screen(self):

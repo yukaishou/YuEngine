@@ -70,6 +70,7 @@ class BuildSettingsUI(QWidget):
         os.system("pyinstaller ../YuEngine/Loading_Ainmtion.py --onefile --noconsole")
         os.system("pyinstaller ../YuEngine/Main_UI.py --onefile --noconsole")
         os.system("pyinstaller ../YuEngine/editor/editor.py --onefile --noconsole")
+        os.system("pyinstaller ../YuEngine/Login.py --onefile --noconsole")
         #把../YuEngine/Resourse拷贝到dist目录下
         print("开始拷贝资源文件")
         shutil.copytree('../YuEngine/Resource', '../YuEngine/dist/Resource')

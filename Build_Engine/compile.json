@@ -1,0 +1,8 @@
+{
+  "files": [
+    "../YuEngine/YuEngine.py",
+    "../YuEngine/Project_Manager.py",
+    "../YuEngine/Loading_Ainmation.py",
+    "..YuEngine/editor/editor.py"
+  ]
+}

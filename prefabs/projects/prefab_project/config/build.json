@@ -1,0 +1,25 @@
+{
+    "build_platform": "Windows",
+    "build_configurations": [
+        {
+            "name": "Debug",
+            "defines": [
+                "DEBUG"
+            ],
+            "build_directory": "Debug",
+            "output_directory": "bin/Debug",
+            "build_command": "cmake --build . --config Debug",
+            "clean_command": "cmake --build . --config Debug --target clean"
+        },
+        {
+            "name": "Release",
+            "defines": [
+                "NDEBUG"
+            ],
+            "build_directory": "Release",
+            "output_directory": "bin/Release",
+            "build_command": "cmake --build . --config Release",
+            "clean_command": "cmake --build . --config Release --target clean"
+        }
+    ]
+}

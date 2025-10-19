@@ -1,0 +1,156 @@
+Game Engine Documentation
+Introduction
+This is a game engine based on Pygame, supporting scene management, script execution, key handling, and more.
+
+Installation and Setup
+Ensure you have the Pygame library installed. If not, you can install it using the following command:
+
+pip install pygame
+DiffCopyInsert
+Core Modules
+engine.py
+The main engine class responsible for initializing the game window, managing the game loop, and handling events.
+
+Initialization
+
+pygame.init()
+class engine:
+    def __init__(self, size, fps, title):
+        # Initialize the engine
+DiffCopyInsert
+Main Methods
+
+quit(): Exits the game.
+full_screen(): Sets the screen to fullscreen mode.
+windowed_screen(size): Sets the screen to windowed mode.
+test_prefab(): Tests the prefab.
+application.py
+Manages the state and behavior of the game application.
+
+Application(engine): Initializes the application.
+log.py
+Handles logging of information.
+
+Log(): Initializes the log recorder.
+add_log(message, level): Adds a log message.
+scene.py
+Manages the game scene, including adding and updating game objects.
+
+Scene(scene_file_path, assets_path, log): Initializes the scene.
+add_game_object(game_object): Adds a game object to the scene.
+script.py
+Handles the execution of scripts.
+
+ScriptRunner(engine): Initializes the script runner.
+key.py
+Handles key input.
+
+Key(): Initializes the key handler.
+ui_button.py
+Manages UI buttons.
+
+Button(x, y, width, height, text, action): Initializes a UI button.
+ui_text.py
+Handles UI text.
+
+UIText(text, color, x, y): Initializes a UI text element.
+image.py
+Handles image rendering.
+
+Image(image_path, log): Initializes an image.
+sdk.py
+Provides a software development kit for the engine.
+
+SDK(engine, scene, key, script_runner, core, application): Initializes the SDK.
+Example Code
+Here is a basic example of how to use the engine:
+
+import pygame
+import sys
+from engine.core import game_object, scene
+from engine.core import script
+from prefabs.script import player_controller as ts
+from prefabs.script import cube_move as m
+from engine import sdk
+from engine.key import key
+from engine import log
+from engine import application
+from engine.core import image as im
+from engine.ui import ui_text
+from engine.ui import ui_button
+import time
+
+pygame.init()
+class engine:
+    def __init__(self, size, fps, title):
+        self.size = size
+        self.application = application.Application(self)
+        self.log = log.Log()
+        self.scene = scene.Scene("prefabs/projects/prefab_project/assets/scene/scene/scene.json", "prefabs/projects/prefab_project/assets/scene/scene/", self.log)
+        self.running = True
+        self.log.add_log("Initializing engine...", "INFO")
+        self.screen = pygame.display.set_mode(size)
+        pygame.display.set_caption(title)
+        self.core = pygame
+        self.log.add_log("Setting up screen...", "INFO")
+        self.clock = pygame.time.Clock()
+        self.log.add_log("Setting up clock...", "INFO")
+        self.key = key.Key()
+        self.log.add_log("Setting up key...", "INFO")
+        self.script_runner = script.ScriptRunner(self)
+        self.log.add_log("Setting up script runner...", "INFO")
+        self.sdk = sdk.SDK(self, self.scene, self.key, None, self.core, self.application)
+        self.log.add_log("Setting up SDK...", "INFO")
+        self.clock.tick(fps)
+        self.test_prefab()
+        while self.running:
+            try:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.quit()
+                    self.bt.handle_event(event)
+                    self.bt1.handle_event(event)
+            except Exception as e:
+                self.log.add_log(f"Error: {e}", "ERROR")
+            self.application.update()
+            self.scene.update()
+            self.scene.draw(self.screen)
+            self.img_cls.draw(self.screen, 0, 0)
+            for obj in self.scene.game_objects:
+                obj.update()
+            self.bt.draw(self.screen)
+            self.bt1.draw(self.screen)
+            pygame.display.update()
+
+    def quit(self):
+        self.running = False
+        self.log.add_log("Exiting...", "INFO")
+        sys.exit()
+
+    def full_screen(self):
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+    def windowed_screen(self, size):
+        self.screen = pygame.display.set_mode(size)
+
+    def test_prefab(self):
+        self.ts = ts.PrefabScript(self.sdk)
+        self.m = m.PrefabScript(self.sdk)
+        self.obj2 = game_object.GameObject(0, 0, self.size[0], 50, (18, 18, 18), [], self.log)
+        self.scene.add_game_object(self.obj2)
+        self.img_cls = im.Image("Resource\\image\\Luanch.jpg", self.log)
+        self.bt = ui_button.Button(10, self.size[1] - 50, 200, 40, "Exit Game", lambda: self.quit())
+        self.bt1 = ui_button.Button(10, self.size[1] - 100, 200, 40, "Start Game", lambda: print("Start Game"))
+        self.txt = ui_text.UIText("Lobby", (255, 255, 255), 10, 10)
+
+# Example usage
+if __name__ == "__main__":
+    game_engine = engine((800, 600), 60, "My Game")
+DiffExpandCopyInsert
+Common Issues
+Pygame not installed: Ensure Pygame is installed using pip install pygame.
+Incorrect file paths: Verify that the file paths for assets (images, scenes, etc.) are correct.
+Development Guide
+Writing Scripts: Create scripts that inherit from PrefabScript and implement necessary methods.
+Handling Events: Use the Key class to handle key events and the Button class for UI button interactions.
+Adding Game Objects: Use GameObject to create game objects and add them to the scene using add_game_object.

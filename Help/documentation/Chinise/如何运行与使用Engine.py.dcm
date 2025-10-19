@@ -1,0 +1,51 @@
+游戏引擎文档
+简介
+这是一个基于Pygame的游戏引擎，支持场景管理、脚本运行、按键处理等功能。
+
+安装和设置
+确保你已经安装了Pygame库。如果没有安装，可以使用以下命令进行安装：
+
+pip install pygame
+DiffCopyInsert
+核心模块
+engine.py
+主引擎类，负责初始化游戏窗口、管理游戏循环、处理事件等。
+
+初始化
+
+pygame.init()
+class engine:
+    def __init__(self, size, fps, title):
+        # 初始化引擎
+DiffCopyInsert
+主要方法
+
+quit(): 退出游戏。
+full_screen(): 设置全屏模式。
+windowed_screen(size): 设置窗口模式。
+test_prefab(): 测试预制物。
+application.py
+管理游戏应用程序的状态和行为。
+
+Application(engine): 初始化应用程序。
+log.py
+负责记录日志信息。
+
+Log(): 初始化日志记录器。
+add_log(message, level): 添加日志信息。
+scene.py
+管理游戏场景，包括添加和更新游戏对象。
+
+Scene(scene_file_path, assets_path, log): 初始化场景。
+add_game_object(game_object): 添加游戏对象
+
+如何运行与使用
+
+首先，你需要创建一个engine实例，并设置窗口大小、帧率和标题。
+如下所示：
+# -- 导入模块 --
+from engine import engine
+
+if __name__ == '__main__':
+    # -- 初始化 --
+    engine = engine((800, 600), 60, "My Game")

@@ -1,0 +1,38 @@
+Structure and Usage of the Engine
+Structure
+The engine consists of five main components:
+
+Main.py: The main program of the engine, responsible for launching and initialization.
+core: The core module of the engine, responsible for basic functionalities. It includes five submodules: game_object, image, scene, script, and sound.
+ui: The UI module of the engine, responsible for user interface functionality.
+key: The input module of the engine, responsible for key-press handling.
+tools: The utility module of the engine, responsible for tool implementations.
+Usage
+Main.py:
+
+The main entry point of the engine.
+Used for engine initialization, including resource loading, UI setup, and game startup.
+core:
+
+Provides the engine’s foundational features, including:
+game_object: Manages game entities and their behaviors.
+image: Handles image rendering and processing.
+scene: Manages scene transitions and scene logic.
+script: Executes game scripts and logic.
+sound: Manages audio playback and sound effects.
+ui:
+
+Handles UI-related operations, including:
+UI rendering and layout.
+UI event handling (e.g., button clicks).
+key:
+
+Manages keyboard input, including:
+Key-press detection.
+Key-event propagation and handling.
+tools:
+
+Provides utility functions for developers, including:
+Debugging tools.
+Resource management utilities.
+Performance profiling tools.

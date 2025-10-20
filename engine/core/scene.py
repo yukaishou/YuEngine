@@ -23,6 +23,7 @@ class Scene:
 
     def _load_game_object(self, go_name: str) -> Optional['GameObjectInfo']:
         """安全加载游戏对象配置"""
+        global module
         base_path = os.path.join(self.dirpath, "GameObjects_info", go_name)
 
         try:
@@ -44,10 +45,10 @@ class Scene:
             # 执行数据验证
             validated_transform = self._validate_transform(configs["transform"])
             validated_render = self._validate_render(configs["render"])
-
+            scripts = []
             return GameObjectInfo(
                 name=go_name,
-                scripts=configs["scripts"].get("components", []),
+                scripts=[None],
                 transform=validated_transform,
                 render=validated_render,
                 main=configs["main"]

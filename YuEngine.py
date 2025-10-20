@@ -7,8 +7,8 @@ from engine.core import game_object as GameObject
 
 s = Cheek.check_compilation_status()
 
-if not s['is_compiled'] == True:
-    game = engine.engine((800,600),60,,"YuEngine")
+if __name__ == "__main__":
+    game = engine.engine((800,600),60,"YuEngine")
 
 
 

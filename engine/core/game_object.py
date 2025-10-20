@@ -36,6 +36,7 @@ class GameObject:
         if self.scripts == None:
             for i in self.scripts:
                 if i == None:
+                    self.logger.add_log("script is None","ERROR")
                     continue
                 else:
                     i.update()

@@ -38,6 +38,7 @@ class engine:
         player = self.scene.game_objects[0]
         player.scripts.append(player_controller)
         player_controller.start()
+        img = im.Image("Resource/image/Cat.jpg",self.log)
         while self.running:
             try:
                 for event in pygame.event.get():
@@ -48,7 +49,6 @@ class engine:
             except Exception as e:
                 self.log.add_log(f"Error: {e}","ERROR")
             self.application.updeta()
-            #self.img_cls.draw(self.screen,0,0, )
             #self.img_cls1.draw(self.screen,size[0]//2,size[1]//2 - 150)
             self.scene.draw(self.screen)
             for i in self.scene.game_objects:
@@ -56,6 +56,7 @@ class engine:
             #self.txt.draw(self.screen)
             #self.bt.draw(self.screen)
             #self.bt1.draw(self.screen)
+            #img.draw(self.screen,size[0]//2,0, )
             pygame.display.update()
 
 

@@ -3,6 +3,9 @@
     "game_objects":[
         {
             "name": "block"
+        },
+        {
+            "name": "Cube"
         }
     ]
 }

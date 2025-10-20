@@ -14,7 +14,7 @@ class GameObject:
         self.logger = logger
 
     def start(self):
-        if self.scripts == None:
+        if self.scripts:
             for i in self.scripts:
                 if i == None:
                     self.logger.add_log("script is None","ERROR")

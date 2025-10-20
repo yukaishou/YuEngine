@@ -1,11 +1,8 @@
 {
     "name":"scene",
     "game_objects":[
-        {
-            "name": "block"
-        },
-        {
-            "name": "Cube"
-        }
+        "block",
+        "Cube",
+        "Player"
     ]
 }

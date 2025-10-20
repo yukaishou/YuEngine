@@ -1,7 +1,7 @@
 class PrefabScript():
-    def __init__(self, game_object,sdk):
-        self.game_object = game_object
+    def __init__(self,sdk):
         self.engine = sdk
+        self.public_vars = {}
 
     def start(self):
         pass

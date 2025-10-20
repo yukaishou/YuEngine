@@ -1,23 +1,21 @@
 import pygame
 import sys
-from engine.core import game_object, scene
+from engine.core import scene
 from engine.core import script
 from prefabs.script import player_controller as ts
-from prefabs.script import cube_move as m
 from engine import sdk
 from engine.key import key
 from engine import log
 from engine import application
-from engine.core import image as im
-import time
 
 pygame.init()
 class engine:
-    def __init__(self, size, fps, tliie):
+    def __init__(self, size, fps, tliie,scene_config,res):
         self.size = size
+        self.res = res
         self.application = application.Application(self)
         self.log = log.Log()
-        self.scene = scene.Scene("prefabs/projects/prefab_project/assets/scene/scene/scene.json","prefabs/projects/prefab_project/assets/scene/scene/",self.log)
+        self.scene = scene.Scene(scene_config["file"],scene_config["dir"],self.log,self.res)
         self.running = True
         self.log.add_log("Initializing engine...","INFO")
         self.screen = pygame.display.set_mode(size)
@@ -33,30 +31,26 @@ class engine:
         self.sdk = sdk.SDK(self,self.scene,self.key,None,self.core,self.application)
         self.log.add_log("Setting up SDK...","INFO")
         self.clock.tick(fps)
-        #self.test_prefab()
-        player_controller = ts.PrefabScript(self.sdk)
-        player = self.scene.game_objects[0]
-        player.scripts.append(player_controller)
-        player_controller.start()
-        img = im.Image("Resource/image/Cat.jpg",self.log)
+        self.subsystems = {
+            "core": self.core,
+            "scene": self.scene,
+            "key": self.key,
+            "script_runner": self.script_runner,
+            "sdk": self.sdk,
+            "log": self.log,
+            "application": self.application,
+        }
         while self.running:
             try:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.quit()
-                    #self.bt.handle_event(event)
-                    #self.bt1.handle_event(event)
             except Exception as e:
                 self.log.add_log(f"Error: {e}","ERROR")
             self.application.updeta()
-            #self.img_cls1.draw(self.screen,size[0]//2,size[1]//2 - 150)
             self.scene.draw(self.screen)
             for i in self.scene.game_objects:
                 i.update()
-            #self.txt.draw(self.screen)
-            #self.bt.draw(self.screen)
-            #self.bt1.draw(self.screen)
-            #img.draw(self.screen,size[0]//2,0, )
             pygame.display.update()
 
 

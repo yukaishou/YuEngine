@@ -1,0 +1,8 @@
+{
+    "name": "my_app",
+    "version": "1.0.0",
+    "description": "My application",
+    "scene": "prefabs/projects/prefab_project/assets/scene/scene/scene.json",
+    "scene_dir": "prefabs/projects/prefab_project/assets/scene/scene",
+    "res": "prefabs/projects/prefab_project/assets"
+}

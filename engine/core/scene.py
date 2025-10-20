@@ -3,6 +3,8 @@ from engine.core.game_object import GameObject
 import json
 import os
 from typing import List, Dict, Optional
+import importlib
+import importlib.util
 
 class Scene:
     REQUIRED_CONFIGS = {
@@ -12,17 +14,34 @@ class Scene:
         "main": "main.json"
     }
 
-    def __init__(self, path: str, dirpath: str, logger):
+    def __init__(self, path: str, dirpath: str, logger,res):
         self.logger = logger
         self.path = path
         self.game_objects: List[GameObject] = []
         self.camera = None
         self.background_color = (255,255,255)
-        self.dirpath = ""
+        self.dirpath = dirpath
+        self.res_ = res
         self._load_scene(path, dirpath)
+    def load_script(self,script_name:str,module_path:str):
+        """加载脚本"""
+        global module
+        try:
+            #从路径加载脚本
+            # 创建模块规格并加载
+            spec = importlib.util.spec_from_file_location(script_name, module_path)
+            if spec is None:
+                self.logger.add_log(f"加载脚本失败: {module_path + script_name} 不是有效的模块路径", "ERROR")
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+        except Exception as e:
+            self.logger.add_log(f"加载脚本失败: {str(e)}", "ERROR")
+            return None
 
     def _load_game_object(self, go_name: str) -> Optional['GameObjectInfo']:
         """安全加载游戏对象配置"""
+        global module
         base_path = os.path.join(self.dirpath, "GameObjects_info", go_name)
 
         try:
@@ -44,10 +63,15 @@ class Scene:
             # 执行数据验证
             validated_transform = self._validate_transform(configs["transform"])
             validated_render = self._validate_render(configs["render"])
-
+            scripts = []
+            for script_path in configs["scripts"]:
+                script = importlib.import_module("player_controller")
+                if script:
+                    scripts.append(script)
+                    print("加载成功")
             return GameObjectInfo(
                 name=go_name,
-                scripts=configs["scripts"].get("components", []),
+                scripts=scripts,
                 transform=validated_transform,
                 render=validated_render,
                 main=configs["main"]

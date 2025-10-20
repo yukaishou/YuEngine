@@ -18,8 +18,8 @@ class GameObject:
             for i in self.scripts:
                 if i == None:
                     self.logger.add_log("script is None","ERROR")
-                    continue
                 else:
+                    print("123333123")
                     i.start()
 
     def draw(self, screen):

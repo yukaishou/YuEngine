@@ -23,7 +23,6 @@ class Scene:
         self.dirpath = dirpath
         self.res_ = res
         self._load_scene(path, dirpath)
-        self.res_ = res
     def load_script(self,script_name:str,module_path:str):
         """加载脚本"""
         global module
@@ -66,9 +65,10 @@ class Scene:
             validated_render = self._validate_render(configs["render"])
             scripts = []
             for script_path in configs["scripts"]:
-                script = self.load_script("player_controller","D:\YuEngine\prefabs\projects\prefab_project/assets\scripts/")
+                script = importlib.import_module("player_controller")
                 if script:
                     scripts.append(script)
+                    print("加载成功")
             return GameObjectInfo(
                 name=go_name,
                 scripts=scripts,
